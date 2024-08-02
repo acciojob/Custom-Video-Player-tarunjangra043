@@ -3,7 +3,8 @@ const video = player.querySelector('.viewer');
 const progress = player.querySelector('.progress');
 const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
-const sliders = player.querySelectorAll('.player__slider');
+const volumeSlider = player.querySelector('input[name="volume"]');
+const speedSlider = player.querySelector('input[name="playbackSpeed"]');
 const skipButtons = player.querySelectorAll('[data-skip]');
 
 function togglePlay() {
@@ -34,6 +35,7 @@ function scrub(e) {
   video.currentTime = scrubTime;
 }
 
+// Hook up the event listeners
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
@@ -43,8 +45,11 @@ toggle.addEventListener('click', togglePlay);
 
 skipButtons.forEach(button => button.addEventListener('click', skip));
 
-sliders.forEach(slider => slider.addEventListener('change', handleRangeUpdate));
-sliders.forEach(slider => slider.addEventListener('mousemove', handleRangeUpdate));
+volumeSlider.addEventListener('change', handleRangeUpdate);
+volumeSlider.addEventListener('mousemove', handleRangeUpdate);
+
+speedSlider.addEventListener('change', handleRangeUpdate);
+speedSlider.addEventListener('mousemove', handleRangeUpdate);
 
 let mousedown = false;
 progress.addEventListener('click', scrub);
